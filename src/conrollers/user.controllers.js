@@ -9,11 +9,20 @@ async function getUsers(req, res) {
         "apellido_paterno",
         "apellido_materno",
         "email",
+        "role",
       ],
     });
 
-    res.json(users);
+    res.status(200).json({
+      ok: true,
+      message: "Lista de usuarios obtenida exitosamente",
+      data: users,
+    });
   } catch (err) {
+    res.status(500).json({
+      ok: false,
+      message: "No se encontraron usuarios",
+    });
     console.log("ERROR" + err);
   }
 }
@@ -30,11 +39,20 @@ async function getOneUser(req, res) {
         "apellido_paterno",
         "apellido_materno",
         "email",
+        "role",
       ],
     });
 
-    res.status(200).json({ oneUser });
+    res.status(200).json({
+      ok: true,
+      message: "Usuario obtenido exitosamente",
+      data: oneUser,
+    });
   } catch (err) {
+    res.status(500).json({
+      ok: false,
+      message: "No se encontraro ningún usuario",
+    });
     console.log("ERROR POR BUSQUEDA DE ID" + err);
   }
 }
@@ -47,9 +65,17 @@ async function createUser(req, res) {
       apellido_materno,
       email,
       contrasenia,
+      role,
     } = req.body;
 
-    console.log(nombre, apellido_paterno, apellido_materno, email, contrasenia);
+    console.log(
+      nombre,
+      apellido_paterno,
+      apellido_materno,
+      email,
+      contrasenia,
+      role
+    );
 
     let newUser = await user.create(
       {
@@ -58,6 +84,7 @@ async function createUser(req, res) {
         apellido_materno,
         email,
         contrasenia,
+        role,
       },
       {
         fields: [
@@ -66,15 +93,21 @@ async function createUser(req, res) {
           "apellido_materno",
           "email",
           "contrasenia",
+          "role",
         ],
       }
     );
 
-    res.json({
-      message: "User creado!",
-      newUser,
+    res.status(200).json({
+      ok: true,
+      message: "Usuario creado exitosamente",
+      data: newUser,
     });
   } catch (err) {
+    res.status(500).json({
+      ok: false,
+      message: "No se pudo crear un nuevo usuario",
+    });
     console.log("Error :" + err);
   }
 }
@@ -87,6 +120,7 @@ async function updateUser(req, res) {
     apellido_materno,
     email,
     contrasenia,
+    role,
   } = req.body;
 
   try {
@@ -97,6 +131,7 @@ async function updateUser(req, res) {
         "apellido_materno",
         "email",
         "contrasenia",
+        "role",
       ],
       where: {
         user_id,
@@ -110,17 +145,23 @@ async function updateUser(req, res) {
         apellido_materno,
         email,
         contrasenia,
+        role,
       },
       {
         where: { user_id },
       }
     );
 
-    return res.json({
-      message: "User Updated",
+    res.status(200).json({
+      ok: true,
+      message: "Usuario actualizado exitosamente",
       data: id,
     });
   } catch (err) {
+    res.status(500).json({
+      ok: false,
+      message: "No se pudo actualizadar el usuario",
+    });
     console.log("Error : " + err);
   }
 }
@@ -133,11 +174,17 @@ async function deleteUser(req, res) {
         user_id,
       },
     });
-    res.json({
-      message: "User eliminado",
-      count: elimnar,
+
+    res.status(200).json({
+      ok: true,
+      message: "Usuario eliminado exitosamente",
+      data: elimnar,
     });
   } catch (err) {
+    res.status(500).json({
+      ok: false,
+      message: "No se pudo eliminar el usuario",
+    });
     console.log("ERROR :" + err);
   }
 }

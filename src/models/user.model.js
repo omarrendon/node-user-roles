@@ -6,6 +6,7 @@ const user = sequelize.define(
   {
     user_id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
     },
     nombre: {
       type: DataTypes.STRING,
@@ -20,6 +21,9 @@ const user = sequelize.define(
       type: DataTypes.STRING,
     },
     contrasenia: {
+      type: DataTypes.STRING,
+    },
+    role: {
       type: DataTypes.STRING,
     },
   },
