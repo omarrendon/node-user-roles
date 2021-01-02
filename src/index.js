@@ -1,10 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
+require;
 
 const app = express();
 
 //Settings
 app.set("port", process.env.PORT || 4000);
+// const port = process.env.PORT;
 
 // Middlewares
 app.use(morgan("dev"));
