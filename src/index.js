@@ -15,7 +15,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 const userRoutes = require("./routes/user.router");
+const adminRoutes = require("./routes/admin.router");
 app.use("/api/users", userRoutes);
+app.use("/api/administrator", adminRoutes);
 
 //Server port
 app.listen(app.get("port"), () => {

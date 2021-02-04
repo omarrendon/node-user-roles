@@ -32,9 +32,9 @@ async function getOneUser(req, res) {
 
   try {
     const oneUser = await user.findOne({
-      where: { id_alumo },
+      where: { user_id },
       attributes: [
-        "id",
+        "user_id",
         "nombre",
         "apellido_paterno",
         "apellido_materno",

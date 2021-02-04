@@ -1,10 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.json({
-    route: "user",
-  });
-});
+const { getAdministrators } = require("../conrollers/admin.controllers");
+
+router.get("/", getAdministrators);
 
 module.exports = router;
